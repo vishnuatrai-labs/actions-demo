@@ -1,0 +1,19 @@
+---
+on: [push]
+
+jobs:
+  bump-version:
+    name: increament version
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      
+      - name: increment tag
+        id: increment-tag
+        uses: vishnuatrai-labs/increment-git-tag@main
+        with:
+          version-type: patch
+
+      - name: get the new version
+        run: echo "New version is available ${{ steps.increment-tag.outputs.new-version }}"
